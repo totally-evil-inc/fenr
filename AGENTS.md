@@ -95,6 +95,63 @@ Every form uses TanStack Form validated by a Zod schema (Standard Schema):
   `.output/`.
 - Tests live next to sources as `*.test.ts(x)` and run with plain `bun test`.
 
+### 7. Skills
+
+Load and follow these skills when the task matches them:
+
+- `/vercel-react-best-practices` — React/Next.js-style performance patterns for React code
+- `/logging-best-practices` — logging (wide events / canonical log lines)
+- `/animation-vocabulary` — naming motion effects when discussing animations
+- `/apple-design` — gesture-driven UI, springs, materials, motion feel
+- `/fixing-motion-performance` — jank, layout thrashing, compositor properties
+- `/improve-animations` — animation audits and improvement plans
+- `/transitions-dev` — production-ready CSS transitions
+- `/shadcn` — anything involving shadcn components or registries
+- `/ui-ux-pro-max` — UI/UX design intelligence (styles, palettes, fonts, UX rules)
+- `/emil-design-eng` — component design polish and micro-interaction details
+
+## Styling convention
+
+- All design tokens and component CSS live in `packages/ui/src/styles/globals.css`
+  (`@layer base`, `@layer components`, `@layer utilities`).
+- Components must **not** use hard-coded Tailwind values (e.g. `bg-white`,
+  `text-gray-900`). Instead use CSS variable tokens mapped through
+  `@theme inline` (e.g. `bg-background`, `text-foreground`, `border-border`).
+- This keeps theming (light/dark mode) centralized and makes refactoring safe.
+- **Custom ScrollArea**: avoid native browser scrollbars. All scrollable
+  containers (chat feeds, thread lists, dropdown menus, side panels) MUST use
+  `@workspace/ui/components/scroll-area` (Radix/shadcn `<ScrollArea />`).
+
+## Working with shadcn/ui Blocks
+
+Throughout the lifetime of this project we will periodically install `shadcn`
+blocks into the repository. Do **not** treat generated block code as
+production-ready architecture. Generated code is a reference implementation —
+consider it raw material.
+
+Rebuild it from scratch using the project's architectural conventions:
+
+- Organize files and folders by feature/domain rather than mirroring the
+  generated output.
+- Extract reusable UI into shared components where appropriate.
+- Create shell/layout components when a component is primarily responsible
+  for composition.
+- Separate presentation from business logic.
+- Move state management, effects, and event handling into custom hooks whenever
+  they improve clarity or reusability.
+- Extract utility functions into appropriate utility modules.
+- Remove duplication aggressively and improve naming.
+- Ensure components have clear, single responsibilities.
+- Follow existing project conventions before introducing new patterns.
+- **Reusability**: extract UI elements (buttons, cards, empty states, dialogs,
+  drawers, etc.) if they have a reasonable chance of being reused.
+- **Maintainability**: favor small focused components, predictable file
+  structures, minimal prop drilling, composition over configuration, and
+  readability. Avoid "God components".
+- **Functional equivalence**: rebuilt implementations must preserve the
+  original functionality and user experience unless there is a clear
+  improvement (e.g. accessibility, performance, cleaner state, types).
+
 ## Layout
 
 ```
