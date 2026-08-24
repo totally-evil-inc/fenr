@@ -21,5 +21,8 @@
     "@biomejs/biome": "^2.5.10",
     "turbo": "^2.9.18",
     "typescript": "^6"
+  },
+  "patchedDependencies": {
+    "@tanstack/router-ssr-query-core@1.169.1": "patches/@tanstack%2Frouter-ssr-query-core@1.169.1.patch"
   }
 }
